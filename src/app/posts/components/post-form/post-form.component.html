@@ -1,0 +1,19 @@
+<div class="container">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input 
+      formControlName="title"
+      type="text" class="form-control" id="title" >
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Content</label>
+      <textarea
+      formControlName="body"
+      class="form-control" 
+      name="body" id="body" cols="30" rows="10"></textarea>
+    </div>
+  <button (click)="submit()" type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+

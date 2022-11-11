@@ -1,0 +1,26 @@
+<div class="container">
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">User ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Action 1</th>
+        <th scope="col">Action 2</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <th scope="row">{{post.id}}</th>
+        <td>{{post.userId}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+        <td> <button class="btn btn-primary" (click)="edit.emit(post.id)"> Edit </button> </td>
+        <td> <button class="btn btn-danger" (click)="delete.emit(post.id)"> Delete </button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

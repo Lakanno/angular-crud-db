@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Posts Page</h1>
+
+    <button 
+    (click)="onAddNewPost()"
+    class="btn btn-success  m-4">Add new post</button>
+    <div>
+        <app-posts-list
+        [posts]="posts"
+        (edit)="onEdit($event)" 
+        (delete)="onDelete($event)"></app-posts-list>
+    </div>
+    <app-post-form 
+    *ngIf="addNewPostMode || chosenPostToEdit" 
+    [chosenPostToEdit]="chosenPostToEdit"
+    (onSubmit)="onSubmitPost($event)"></app-post-form>
+</div>
