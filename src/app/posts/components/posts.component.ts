@@ -12,7 +12,7 @@ import { PostsHttpService } from '../services/posts-http.service';
 export class PostsComponent implements OnInit {
   addNewPostMode = false;
   chosenPostToEdit: IPost | null = null;
-  
+  chosenPostToFullInfo: IPost | null;
   // თავიდან არის ნალი მაგრამ თუა რიჩიეს შეიცვლება აიპოსტ
   posts: IPost[] =[]
   constructor(private postsHttp: PostsHttpService) { }
@@ -24,12 +24,17 @@ export class PostsComponent implements OnInit {
   getAllPosts(){
     this.postsHttp.getPosts().subscribe((res)=> {
       this.posts = res;
-      
     })
   }
 
+  getOnePost(id: number){
+    this.postsHttp.getOnePost(id).subscribe((onePost) =>{
+     this.chosenPostToFullInfo = onePost;
+    });
+  }
+
   onAddNewPost(){
-    this.addNewPostMode = true;
+    this.addNewPostMode =  !this.addNewPostMode;
   }
   onEdit(id: number){
     this.chosenPostToEdit = this.posts.find((post: IPost) => post.id === id) as IPost;
@@ -39,6 +44,7 @@ export class PostsComponent implements OnInit {
       this.postsHttp.deletePosts(id).pipe(tap((data)=>{
         this.posts.splice(indexIdPostToBeDeleted, 1)
     }),
+    retry(2), //რექვესტი რომ იგზავნება მასინ გამოიყენება
      catchError((err)=>{
       alert('something Heppened')
       return of (null)
@@ -47,21 +53,38 @@ export class PostsComponent implements OnInit {
     // this.posts.splice(indexIdPostToBeDeleted, 1)
   }
 
-  onSubmitPost(post: INewPost | IPost){
+  addNewPost(post: INewPost){
+    this.postsHttp.addNewPost(post).subscribe((data) => {
+      console.log(data);
+      this.posts.push(data);
+      
+    })
+  }
 
+  updatePost(post: IPost){
+    this.postsHttp.updatePost(post).subscribe((data)=>{
+      this.chosenPostToEdit = null;
+      this.getAllPosts();
+      console.log(data);      
+    })
+  }
+
+  onSubmitPost(post: INewPost | IPost){
     if (!(post as IPost).id) {
-      const newPost: IPost = {
-        id: 20,
+      const newPost = {
         body: post.body,
         title: post.title,
         userId: 90
-      }
-      this.posts.push(newPost);
+      } as INewPost
+      this.addNewPost(newPost);
+      // this.posts.push(newPost);
       this.addNewPostMode = false;
+      
     }else{
       const indexToReplace = this.posts.findIndex((p) => p.id === (post as IPost).id);
-      this.posts[indexToReplace] = post as IPost;
+      this.updatePost(post as IPost);
+      // this.posts[indexToReplace] = post as IPost;
     }
-    }
+  }
 
 }

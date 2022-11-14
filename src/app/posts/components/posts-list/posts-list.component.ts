@@ -11,6 +11,7 @@ export class PostsListComponent implements OnInit {
 @Input() posts: IPost[] = [];
 @Output() edit = new EventEmitter<number>();
 @Output() delete = new EventEmitter<number>();
+@Output() fullInfo = new EventEmitter<number>();
 
   constructor() { }
 

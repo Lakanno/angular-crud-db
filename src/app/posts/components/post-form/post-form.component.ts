@@ -22,6 +22,7 @@ export class PostFormComponent implements OnInit {
 
 
   @Output() onSubmit = new EventEmitter<INewPost | IPost>();
+  
   form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(10)]),
     body: new FormControl('', [Validators.required, Validators.maxLength(100)]),

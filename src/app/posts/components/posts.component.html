@@ -8,10 +8,15 @@
         <app-posts-list
         [posts]="posts"
         (edit)="onEdit($event)" 
+        (fullInfo)="getOnePost($event)"
         (delete)="onDelete($event)"></app-posts-list>
     </div>
     <app-post-form 
     *ngIf="addNewPostMode || chosenPostToEdit" 
     [chosenPostToEdit]="chosenPostToEdit"
     (onSubmit)="onSubmitPost($event)"></app-post-form>
+
+    <ng-container *ngIf="chosenPostToFullInfo">
+        <p>Chosen Post title: {{chosenPostToFullInfo.title}}</p>
+    </ng-container>
 </div>

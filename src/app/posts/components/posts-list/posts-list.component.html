@@ -9,6 +9,7 @@
         <th scope="col">Content</th>
         <th scope="col">Action 1</th>
         <th scope="col">Action 2</th>
+        <th scope="col">Action 3</th>
       </tr>
     </thead>
     
@@ -20,6 +21,7 @@
         <td>{{post.body}}</td>
         <td> <button class="btn btn-primary" (click)="edit.emit(post.id)"> Edit </button> </td>
         <td> <button class="btn btn-danger" (click)="delete.emit(post.id)"> Delete </button> </td>
+        <td> <button class="btn btn-success" (click)="fullInfo.emit(post.id)" > Get full info </button> </td>
       </tr>
     </tbody>
   </table>
