@@ -6,6 +6,7 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
+
 @NgModule({
   declarations: [
     PostsComponent,
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http'
     ReactiveFormsModule,
     HttpClientModule
   ],
-  exports: [PostsComponent]
+  exports: [PostsComponent],
+
 })
 export class PostsModule { }

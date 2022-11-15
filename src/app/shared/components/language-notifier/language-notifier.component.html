@@ -1,0 +1,8 @@
+<div class="card container position" *ngIf="isVisible$ | async as visible">
+    <div class="card-header">
+        {{visible}}
+      </div>
+    <div class="card-body">
+      <h5 class="card-title">Language successfully changed to {{visible}}</h5>
+    </div>
+  </div>

@@ -1,0 +1,7 @@
+.position{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    max-width: 300px;
+    width: 100%;
+}

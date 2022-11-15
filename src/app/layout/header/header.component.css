@@ -1,0 +1,7 @@
+.hover{
+    cursor: pointer;
+    transition: 0.5s;
+}
+.hover:hover{
+    font-weight: 900;
+}
